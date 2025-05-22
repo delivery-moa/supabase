@@ -92,4 +92,5 @@ CREATE TABLE "payment"(
     "status" TEXT NOT NULL,
     "amount" BIGINT NOT NULL
 );
-
+ALTER TABLE
+    "payment" ADD PRIMARY KEY("id");

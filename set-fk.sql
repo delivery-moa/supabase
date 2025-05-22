@@ -1,6 +1,4 @@
 ALTER TABLE
-    "payment" ADD PRIMARY KEY("id");
-ALTER TABLE
     "order" ADD CONSTRAINT "order_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "user"("id");
 ALTER TABLE
     "chat" ADD CONSTRAINT "chat_room_id_foreign" FOREIGN KEY("room_id") REFERENCES "room"("id");
