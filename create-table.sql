@@ -1,0 +1,95 @@
+CREATE TABLE "user"(
+    "id" UUID NOT NULL,
+    "email" TEXT NOT NULL,
+    "pw" TEXT NOT NULL,
+    "nickname" TEXT NOT NULL,
+    "user_rating" FLOAT(53) NOT NULL,
+    "cash" BIGINT NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+);
+ALTER TABLE
+    "user" ADD PRIMARY KEY("id");
+CREATE TABLE "room"(
+    "id" BIGINT NOT NULL,
+    "store_id" BIGINT NOT NULL,
+    "room_name" TEXT NOT NULL,
+    "room_address" TEXT NOT NULL,
+    "max_people" INTEGER NOT NULL,
+    "users" jsonb NOT NULL,
+    "leader_id" UUID NOT NULL,
+    "status" TEXT NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+);
+ALTER TABLE
+    "room" ADD PRIMARY KEY("id");
+CREATE TABLE "store"(
+    "id" BIGINT NOT NULL,
+    "category_id" TEXT NOT NULL,
+    "store_name" TEXT NOT NULL,
+    "store_address" TEXT NOT NULL,
+    "min_price" BIGINT NOT NULL,
+    "tel" TEXT NOT NULL
+);
+ALTER TABLE
+    "store" ADD PRIMARY KEY("id");
+CREATE TABLE "menu_category"(
+    "id" TEXT NOT NULL,
+    "category" TEXT NOT NULL
+);
+ALTER TABLE
+    "menu_category" ADD PRIMARY KEY("id");
+CREATE TABLE "order"(
+    "room_id" BIGINT NOT NULL,
+    "store_id" BIGINT NOT NULL,
+    "room_order" jsonb NOT NULL,
+    "total_price" BIGINT NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
+    "user_id" UUID NOT NULL,
+    "order_id" BIGINT NOT NULL
+);
+ALTER TABLE
+    "order" ADD PRIMARY KEY("order_id");
+CREATE TABLE "menu"(
+    "id" BIGINT NOT NULL,
+    "store_id" BIGINT NOT NULL,
+    "img_id" BIGINT NOT NULL,
+    "menu_name" TEXT NOT NULL,
+    "menu_price" BIGINT NOT NULL
+);
+ALTER TABLE
+    "menu" ADD PRIMARY KEY("id");
+CREATE TABLE "chat"(
+    "id" BIGINT NOT NULL,
+    "room_id" BIGINT NOT NULL,
+    "chat" TEXT NOT NULL,
+    "user_id" UUID NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+);
+ALTER TABLE
+    "chat" ADD PRIMARY KEY("id");
+CREATE TABLE "image"(
+    "id" BIGINT NOT NULL,
+    "bucket" TEXT NOT NULL,
+    "folder" TEXT NOT NULL,
+    "filename" TEXT NOT NULL
+);
+ALTER TABLE
+    "image" ADD PRIMARY KEY("id");
+CREATE TABLE "qna"(
+    "id" BIGINT NOT NULL,
+    "user_id" UUID NOT NULL,
+    "title" TEXT NOT NULL,
+    "q_contents" TEXT NOT NULL,
+    "q_answer" TEXT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+);
+ALTER TABLE
+    "qna" ADD PRIMARY KEY("id");
+CREATE TABLE "payment"(
+    "id" BIGINT NOT NULL,
+    "user_id" UUID NOT NULL,
+    "order_id" BIGINT NOT NULL,
+    "status" TEXT NOT NULL,
+    "amount" BIGINT NOT NULL
+);
+
