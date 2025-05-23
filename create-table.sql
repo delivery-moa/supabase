@@ -1,7 +1,5 @@
 CREATE TABLE "user"(
     "id" UUID NOT NULL,
-    "email" TEXT NOT NULL,
-    "pw" TEXT NOT NULL,
     "nickname" TEXT NOT NULL,
     "user_rating" FLOAT(53) DEFAULT 50.0,
     "cash" BIGINT DEFAULT 0,
