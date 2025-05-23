@@ -3,9 +3,9 @@ CREATE TABLE "user"(
     "email" TEXT NOT NULL,
     "pw" TEXT NOT NULL,
     "nickname" TEXT NOT NULL,
-    "user_rating" FLOAT(53) NOT NULL,
-    "cash" BIGINT NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "user_rating" FLOAT(53) DEFAULT 50.0,
+    "cash" BIGINT DEFAULT 0,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now()
 );
 ALTER TABLE
     "user" ADD PRIMARY KEY("id");
@@ -15,10 +15,10 @@ CREATE TABLE "room"(
     "room_name" TEXT NOT NULL,
     "room_address" TEXT NOT NULL,
     "max_people" INTEGER NOT NULL,
-    "users" jsonb NOT NULL,
+    "users" jsonb default '[]'::jsonb,
     "leader_id" UUID NOT NULL,
-    "status" TEXT NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "status" TEXT DEFAULT 'active', -- active, 
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now()
 );
 ALTER TABLE
     "room" ADD PRIMARY KEY("id");
@@ -27,7 +27,7 @@ CREATE TABLE "store"(
     "category_id" TEXT NOT NULL,
     "store_name" TEXT NOT NULL,
     "store_address" TEXT NOT NULL,
-    "min_price" BIGINT NOT NULL,
+    "min_price" BIGINT DEFAULT 10000,
     "tel" TEXT NOT NULL
 );
 ALTER TABLE
@@ -45,7 +45,7 @@ CREATE TABLE "order"(
     "store_id" BIGINT NOT NULL,
     "room_order" jsonb NOT NULL,
     "total_price" BIGINT NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now()
 );
 ALTER TABLE
     "order" ADD PRIMARY KEY("order_id");
@@ -63,7 +63,7 @@ CREATE TABLE "chat"(
     "room_id" BIGINT NOT NULL,
     "chat" TEXT NOT NULL,
     "user_id" UUID NOT NULL,
-    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now()
 );
 ALTER TABLE
     "chat" ADD PRIMARY KEY("id");
