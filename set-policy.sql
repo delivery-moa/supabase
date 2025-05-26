@@ -11,14 +11,14 @@ DROP POLICY IF EXISTS "Insert own user data" ON "user";
 CREATE POLICY "Insert own user data"
 ON "user"
 FOR INSERT
-WITH CHECK (id = auth.uid());
+WITH CHECK (id = auth.uid() and auth.uid() is not NULL);
 
 DROP POLICY IF EXISTS "Update own user data" ON "user";
 CREATE POLICY "Update own user data"
 ON "user"
 FOR UPDATE
-USING (id = auth.uid())
-WITH CHECK (id = auth.uid());
+USING (id = auth.uid() and auth.uid() is not NULL)
+WITH CHECK (id = auth.uid() and auth.uid() is not NULL);
 
 -- CHAT TABLE
 ALTER TABLE "chat" ENABLE ROW LEVEL SECURITY;
@@ -33,7 +33,7 @@ DROP POLICY IF EXISTS "Insert own user data" ON "chat";
 CREATE POLICY "Insert own user data"
 ON "chat"
 FOR INSERT
-WITH CHECK (user_id = auth.uid());
+WITH CHECK (user_id = auth.uid() and auth.uid() is not NULL);
 
 -- PAYMENT TABLE
 ALTER TABLE "payment" ENABLE ROW LEVEL SECURITY;
@@ -48,14 +48,14 @@ DROP POLICY IF EXISTS "Insert own payment data" ON "payment";
 CREATE POLICY "Insert own payment data"
 ON "payment"
 FOR INSERT
-WITH CHECK (user_id = auth.uid());
+WITH CHECK (user_id = auth.uid() and auth.uid() is not NULL);
 
 DROP POLICY IF EXISTS "Update own payment data" ON "payment";
 CREATE POLICY "Update own payment data"
 ON "payment"
 FOR UPDATE
-USING (user_id = auth.uid())
-WITH CHECK (user_id = auth.uid());
+USING (user_id = auth.uid() and auth.uid() is not NULL)
+WITH CHECK (user_id = auth.uid() and auth.uid() is not NULL);
 
 -- ROOM TABLE
 ALTER TABLE "room" ENABLE ROW LEVEL SECURITY;
@@ -70,13 +70,13 @@ DROP POLICY IF EXISTS "Insert own room data" ON "room";
 CREATE POLICY "Insert own room data"
 ON "room"
 FOR INSERT
-WITH CHECK (leader_id = auth.uid());
+WITH CHECK (leader_id = auth.uid() and auth.uid() is not NULL);
 
 DROP POLICY IF EXISTS "Delete own room data" ON "room";
 CREATE POLICY "Delete own room data"
 ON "room"
 FOR DELETE
-USING (leader_id = auth.uid());
+USING (leader_id = auth.uid() and auth.uid() is not NULL);
 
 -- ORDER TABLE
 ALTER TABLE "order" ENABLE ROW LEVEL SECURITY;
@@ -91,7 +91,7 @@ DROP POLICY IF EXISTS "Insert own order data" ON "order";
 CREATE POLICY "Insert own order data"
 ON "order"
 FOR INSERT
-WITH CHECK (user_id = auth.uid());
+WITH CHECK (user_id = auth.uid() and auth.uid() is not NULL);
 
 -- MENU_CATEGORY TABLE
 ALTER TABLE "menu_category" ENABLE ROW LEVEL SECURITY;
