@@ -54,6 +54,34 @@ ALTER TABLE "room"
     ADD CONSTRAINT "room_leader_id_foreign"
     FOREIGN KEY ("leader_id") REFERENCES auth.users(id);
 
+-- room_join.user_id
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.table_constraints
+        WHERE constraint_name = 'room_join_user_id_foreign'
+				) THEN
+				    ALTER TABLE "room_join" DROP CONSTRAINT "room_join_user_id_foreign";
+				END IF;
+END$$;
+ALTER TABLE "room_join"
+    ADD CONSTRAINT "room_join_user_id_foreign"
+    FOREIGN KEY ("user_id") REFERENCES auth.users(id);
+
+-- room_join.room_id
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.table_constraints
+        WHERE constraint_name = 'room_join_room_id_foreign'
+				) THEN
+				    ALTER TABLE "room_join" DROP CONSTRAINT "room_join_room_id_foreign";
+				END IF;
+END$$;
+ALTER TABLE "room_join"
+    ADD CONSTRAINT "room_join_room_id_foreign"
+    FOREIGN KEY ("room_id") REFERENCES "room" ("id");
+
 -- menu.img_id
 DO $$
 BEGIN
