@@ -3,6 +3,9 @@ CREATE TABLE "user"(
     "nickname" TEXT NOT NULL,
     "user_rating" FLOAT(53) DEFAULT 50.0,
     "cash" BIGINT DEFAULT 0,
+				"profile_url" TEXT,
+				"address" TEXT,
+				"room_address_detail" TEXT,
     "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now()
 );
 ALTER TABLE
